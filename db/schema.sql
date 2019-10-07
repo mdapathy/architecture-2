@@ -27,7 +27,3 @@ INSERT INTO users (users_name, users_interests) VALUES ('user3', '{"politics","t
 INSERT INTO forums (name, topic_keyword, users) VALUES ('Politics in USA','politics', '{1,3}');
 INSERT INTO forums (name, topic_keyword, users) VALUES ('Game of Thrones S8','tv-series','{2,3}');
 INSERT INTO forums (name, topic_keyword, users) VALUES ('Rock bands', 'music', '{1,2}');
-
-
-
-
