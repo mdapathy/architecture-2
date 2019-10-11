@@ -2,7 +2,7 @@ package users
 
 import (
 	"encoding/json"
-	"github.com/mdapathy/softeng/Lab2/server/tools"
+	"github.com/mdapathy/architecture-2/server/tools"
 	"log"
 	"net/http"
 )

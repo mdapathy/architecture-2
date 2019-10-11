@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/mdapathy/softeng/Lab2/server/forums"
-	"github.com/mdapathy/softeng/Lab2/server/users"
+	"github.com/mdapathy/architecture-2/server/forums"
+	"github.com/mdapathy/architecture-2/server/users"
 	"net/http"
 )
 

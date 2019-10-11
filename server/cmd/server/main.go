@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"flag"
-	"github.com/mdapathy/softeng/Lab2/server/db"
+	"github.com/mdapathy/architecture-2/server/db"
 	"log"
 	"net/http"
 	"os"

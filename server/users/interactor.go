@@ -1,7 +1,7 @@
 package users
 
 import (
-	"github.com/mdapathy/softeng/Lab2/server/forums"
+	"github.com/mdapathy/architecture-2/server/forums"
 	"net/http"
 )
 
