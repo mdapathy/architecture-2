@@ -13,7 +13,6 @@ func handleCreateUser(s *Storage, r *http.Request, rw http.ResponseWriter) (int,
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		return 0, nil, err
 	}
-
 	id, err := s.CreateUser(user.Name, user.Interests)
 
 	if err == nil {

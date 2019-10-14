@@ -5,7 +5,7 @@ const Client = baseUrl => {
 
     return {
         listForum: () => client.get('/forums'),
-        createUser: (id, strings) => client.get('/users', {id, strings})
+        createUser: (name, strings) => client.post('/user', {"name": name, "interests": strings})
     }
 };
 

@@ -10,13 +10,12 @@ import (
 	"os/signal"
 )
 
-var httpPortNumber = flag.Int("p", 8795, "HTTP port number")
+var httpPortNumber = flag.Int("p", 8080, "HTTP port number")
 
 func NewDbConnection() (*sql.DB, error) {
 	conn := &db.Connection{
-		DbName:     "lab2",
-		User:       "lab2user",
-		Password:   "test",
+		DbName:     "postgres",
+		User:       "postgres",
 		Host:       "localhost",
 		DisableSSL: true,
 	}
