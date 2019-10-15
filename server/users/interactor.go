@@ -5,16 +5,23 @@ import (
 	"net/http"
 )
 
+type Answer struct {
+	Id int
+	Interests []string
+}
+
 type HttpHandlerFunc http.HandlerFunc
 
 func HttpHandler(s *Storage, sf *forums.Storage) HttpHandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		if r.Method == "POST" {
 
-			id, strings, err := handleCreateUser(s, r, rw)
+			var answer Answer;
+			var err error;
+			answer.Id, answer.Interests, err = handleCreateUser(s, r, rw)
 
 			if err == nil {
-				forums.HandleUpdateForums(sf, rw, id, strings)
+				forums.HandleUpdateForums(sf, rw, answer.Id, answer.Interests)
 			}
 
 		} else {
