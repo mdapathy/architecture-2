@@ -6,7 +6,7 @@ import (
 )
 
 type Answer struct {
-	Id int
+	Id        int
 	Interests []string
 }
 
@@ -16,8 +16,8 @@ func HttpHandler(s *Storage, sf *forums.Storage) HttpHandlerFunc {
 	return func(rw http.ResponseWriter, r *http.Request) {
 		if r.Method == "POST" {
 
-			var answer Answer;
-			var err error;
+			var answer Answer
+			var err error
 			answer.Id, answer.Interests, err = handleCreateUser(s, r, rw)
 
 			if err == nil {
