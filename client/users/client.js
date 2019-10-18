@@ -1,13 +1,13 @@
-const http = require('../../common/http');
+const http = require('../common/http');
 
-const ClientForum = (baseUrl) => {
+const ClientUser = (baseUrl) => {
 
-    const client = http.ClientForum(baseUrl);
+    const client = http.Client(baseUrl);
 
     return {
-        listForums: () => client.get('/forums'),
+        createUser: (name, strings) => client.post('/user', {"name": name, "interests": strings})
     }
 
 };
 
-module.exports = { ClientForum };
+module.exports = { ClientUser };
