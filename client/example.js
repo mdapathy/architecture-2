@@ -14,7 +14,7 @@ client.listForum()
     });
 
 // Scenario 2: Create new channel.
-client.createUser("Andrew", ['Ukraine', 'Vietnam'])
+client.createUser("Andrey", ['politics', 'tv-series'])
     .then((resp) => {
         console.log('=== Scenario 2 ===');
         console.log('Create user response:', resp);
