@@ -11,7 +11,7 @@ import (
 type HttpPortNumber int
 
 // ChatApiServer configures necessary handlers and starts listening on a configured port.
-type ChatApiServer struct {
+type ForumsApiServer struct {
 	Port HttpPortNumber
 
 	ForumsHandler forums.HttpHandlerFunc
@@ -20,7 +20,7 @@ type ChatApiServer struct {
 	server *http.Server
 }
 
-func (s *ChatApiServer) Start() error {
+func (s *ForumsApiServer) Start() error {
 
 	if s.ForumsHandler == nil || s.UsersHandler == nil {
 		return fmt.Errorf(" HTTP handlers are not defined - cannot start")
@@ -43,7 +43,7 @@ func (s *ChatApiServer) Start() error {
 }
 
 // Stops will shut down the previously started HTTP server.
-func (s *ChatApiServer) Stop() error {
+func (s *ForumsApiServer) Stop() error {
 	if s.server == nil {
 		return fmt.Errorf("server was not started")
 	}

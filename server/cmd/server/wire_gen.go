@@ -12,7 +12,7 @@ import (
 
 // Injectors from modules.go:
 
-func ComposeApiServer(port HttpPortNumber) (*ChatApiServer, error) {
+func ComposeApiServer(port HttpPortNumber) (*ForumsApiServer, error) {
 	db, err := NewDbConnection()
 	if err != nil {
 		return nil, err
@@ -21,10 +21,10 @@ func ComposeApiServer(port HttpPortNumber) (*ChatApiServer, error) {
 	httpHandlerFunc := forums.HttpHandler(storage)
 	usersStorage := users.NewStore(db)
 	usersHttpHandlerFunc := users.HttpHandler(usersStorage, storage)
-	chatApiServer := &ChatApiServer{
+	forumsApiServer := &ForumsApiServer{
 		Port:          port,
 		ForumsHandler: httpHandlerFunc,
 		UsersHandler:  usersHttpHandlerFunc,
 	}
-	return chatApiServer, nil
+	return forumsApiServer, nil
 }
