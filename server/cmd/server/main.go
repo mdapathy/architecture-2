@@ -14,8 +14,9 @@ var httpPortNumber = flag.Int("p", 8080, "HTTP port number")
 
 func NewDbConnection() (*sql.DB, error) {
 	conn := &db.Connection{
-		DbName:     "postgres",
-		User:       "postgres",
+		DbName:     "lab2",
+		User:       "lab2user",
+		Password:   "test",
 		Host:       "localhost",
 		DisableSSL: true,
 	}
