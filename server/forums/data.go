@@ -3,6 +3,7 @@ package forums
 import (
 	"database/sql"
 	"github.com/lib/pq"
+	"strings"
 )
 
 type Storage struct {
@@ -21,9 +22,12 @@ type Forum struct {
 
 func (s *Storage) ListForums() ([]*Forum, error) {
 
-	rows, err := s.Db.Query("select forums.id, forums.name, forums.topic_keyword," +
-		" array_agg(users.users_name) from forums left join users " +
-		"on users.id = any(users) group by forums.id limit 200;")
+	rows, err := s.Db.Query(
+		"select a.id, a.name, a.topic_keyword, array_agg(a.users_name) as users " +
+			" from ( select forums.id, forums.name, forums.topic_keyword, userforum.userid, " +
+			"users.users_name  from forums left join userforum on forums.id = userforum.forumid  " +
+			"left join users on userforum.userid = users.id order by forums.id) a group by a.id, a.name , " +
+			"a.topic_keyword order by a.id;")
 	if err != nil {
 		return nil, err
 	}
@@ -52,12 +56,29 @@ func (s *Storage) ListForums() ([]*Forum, error) {
 
 func (s *Storage) UpdateForums(id int, topicKeyword []string) error {
 
-	for i := 0; i < len(topicKeyword); i++ {
-		_, err := s.Db.Exec("UPDATE forums set users = array_append(users, $2) WHERE  topic_keyword= $1;", topicKeyword[i], id)
+	str := "'" + strings.Join(topicKeyword, "' , '") + "'"
+	println(str)
+	rows, err := s.Db.Query("select id from forums where topic_keyword in (" + str + ")")
+	if err != nil {
+		return err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+
+		var forumid int
+		if err = rows.Scan(&forumid); err != nil {
+			return err
+		}
+		_, err = s.Db.Query("insert into userforum values ($1, $2)", forumid, id)
+
 		if err != nil {
 			return err
 		}
+
 	}
+
 
 	return nil
 }
